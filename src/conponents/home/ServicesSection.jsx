@@ -1,29 +1,12 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import PageTitle from "../shared/PageTitle";
 import ServiceCard from "./ServiceCard";
 import SecondaryButton from "../shared/SecondaryButton";
+import { DataContext } from "../../providers/DataProvider";
 
 const ServicesSection = () => {
-  const [services, setServices] = useState([]);
+  const { services } = useContext(DataContext);
 
-  //   Fetch the services from Database for service section
-  useEffect(() => {
-    const fetchServices = async () => {
-      try {
-        fetch("services.json")
-          .then((res) => res.json())
-          .then((data) => setServices(data));
-      } catch (err) {
-        console.log(err.message);
-      }
-    };
-    fetchServices();
-  }, []);
-
-  //   Handle the service card
-  const handleServie = (id) => {
-    console.log("service called with id:", id);
-  };
   return (
     <div className="bg-base-200 py-10">
       <PageTitle
@@ -33,11 +16,7 @@ const ServicesSection = () => {
       />
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 my-8 px-2 md:px-6">
         {services.map((service) => (
-          <ServiceCard
-            key={service._id}
-            service={service}
-            handleServie={handleServie}
-          />
+          <ServiceCard key={service._id} service={service} />
         ))}
       </div>
       <div className="flex justify-center mt-10">

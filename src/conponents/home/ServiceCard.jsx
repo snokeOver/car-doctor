@@ -1,6 +1,10 @@
+import { useContext } from "react";
 import { FaArrowRight } from "react-icons/fa6";
+import { Link } from "react-router-dom";
+import { DataContext } from "../../providers/DataProvider";
 
-const ServiceCard = ({ service, handleServie }) => {
+const ServiceCard = ({ service }) => {
+  const { setCheckOutId } = useContext(DataContext);
   return (
     <div className="card  bg-base-100 shadow-xl">
       <figure className="px-3 pt-3">
@@ -11,9 +15,13 @@ const ServiceCard = ({ service, handleServie }) => {
 
         <div className="card-actions flex justify-between text-prime">
           <p className=""> price: {service.price}</p>
-          <button className="">
+
+          <Link
+            to={`/checkOut/${service.title}`}
+            onClick={() => setCheckOutId(service._id)}
+          >
             <FaArrowRight />
-          </button>
+          </Link>
         </div>
       </div>
     </div>

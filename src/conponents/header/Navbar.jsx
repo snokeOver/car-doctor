@@ -62,18 +62,24 @@ const Navbar = () => {
           Services
         </NavLink>
       </li>
-      <li>
-        <NavLink
-          className={({ isActive }) =>
-            `${
-              isActive ? "text-prime border-b border-prime" : "hover:text-prime"
-            } mr-1 rounded-md`
-          }
-          to="/blog"
-        >
-          Blog
-        </NavLink>
-      </li>
+      {user && (
+        <>
+          <li>
+            <NavLink
+              className={({ isActive }) =>
+                `${
+                  isActive
+                    ? "text-prime border-b border-prime"
+                    : "hover:text-prime"
+                } mr-1 rounded-md`
+              }
+              to="/my-orders"
+            >
+              My Orders
+            </NavLink>
+          </li>
+        </>
+      )}
       <li>
         <NavLink
           className={({ isActive }) =>

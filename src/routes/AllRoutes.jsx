@@ -6,9 +6,13 @@ import Register from "../pages/Register";
 import About from "../pages/About";
 import Contact from "../pages/Contact";
 import Services from "../pages/Services";
-import Blog from "../pages/Blog";
+
 import NotFound from "../pages/NotFound";
 import Profile from "../pages/Profile";
+import CheckOut from "../pages/CheckOut";
+import PrivateRoutes from "./PrivateRoutes";
+import PublicRoutes from "./PublicRoutes";
+import MyOrders from "../pages/MyOrders";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -21,11 +25,19 @@ const router = createBrowserRouter([
       },
       {
         path: "/login",
-        element: <Login />,
+        element: (
+          <PublicRoutes>
+            <Login />
+          </PublicRoutes>
+        ),
       },
       {
         path: "/register",
-        element: <Register />,
+        element: (
+          <PublicRoutes>
+            <Register />
+          </PublicRoutes>
+        ),
       },
       {
         path: "/about",
@@ -40,12 +52,24 @@ const router = createBrowserRouter([
         element: <Services />,
       },
       {
-        path: "/blog",
-        element: <Blog />,
+        path: "/my-orders",
+        element: (
+          <PrivateRoutes>
+            <MyOrders />
+          </PrivateRoutes>
+        ),
       },
       {
         path: "/profile",
         element: <Profile />,
+      },
+      {
+        path: "/checkout/:id",
+        element: (
+          <PrivateRoutes>
+            <CheckOut />
+          </PrivateRoutes>
+        ),
       },
     ],
   },

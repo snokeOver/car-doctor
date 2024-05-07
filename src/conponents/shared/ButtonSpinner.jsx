@@ -1,5 +1,5 @@
 const ButtonSpinner = () => {
-  return <span className="loading loading-spinner text-prime mr-2"></span>;
+  return <span className="loading loading-spinner text-blue-500 mr-2"></span>;
 };
 
 export default ButtonSpinner;
