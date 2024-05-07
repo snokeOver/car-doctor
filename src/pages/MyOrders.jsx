@@ -16,7 +16,8 @@ const MyOrders = () => {
     const fetchOrders = async () => {
       try {
         const response = await axios.get(
-          `${baseUrl}/api/checkouts/${user.uid}`
+          `${baseUrl}/api/checkouts/${user.uid}`,
+          { withCredentials: true }
         );
         if (response) {
           setOrders(response.data);

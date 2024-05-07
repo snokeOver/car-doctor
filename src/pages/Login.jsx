@@ -2,9 +2,12 @@ import { useContext, useState } from "react";
 import ActionButton from "../conponents/shared/ActionButton";
 import { AuthContext } from "../providers/AuthProvider";
 import { DataContext } from "../providers/DataProvider";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Login = () => {
+  const baseUrl = import.meta.env.VITE_BASE_URL;
+  const location = useLocation();
   const { setPageLoading } = useContext(DataContext);
   const { signIn } = useContext(AuthContext);
   const [formData, setFormData] = useState({
@@ -29,9 +32,17 @@ const Login = () => {
     setPageLoading(true);
 
     signIn(formData.email, formData.pass)
-      .then((result) => {
-        setPageLoading(false);
-        navigate("/");
+      .then(async (result) => {
+        const response = await axios.post(
+          `${baseUrl}/api/jwt`,
+          { uid: result.user.uid },
+          { withCredentials: true }
+        );
+
+        if (response) {
+          setPageLoading(false);
+          navigate(location?.state ? location?.state : "/");
+        }
       })
       .catch((err) => {
         setErrMsg(err.message);
