@@ -68,7 +68,10 @@ const CheckOut = () => {
             Check Out
           </h3>
         </div>
-        <div className="absolute bottom-0 left-1/2 py-1 px-7 bg-prime">
+        <div
+          className="absolute bottom-0 left-1/2 py-1 px-7 bg-prime"
+          style={{ clipPath: "polygon(13% 0, 86% 0, 100% 100%, 0% 100%)" }}
+        >
           <p className="text-gray-100">Home/Checkout</p>
         </div>
       </div>

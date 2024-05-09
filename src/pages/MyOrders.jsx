@@ -15,7 +15,6 @@ const MyOrders = () => {
 
   // Fetch all the checkout from Database
   useEffect(() => {
-    setPageLoading(true);
     const fetchOrders = async () => {
       try {
         const response = await sAxios.get(`/api/checkouts/${user.uid}`);
@@ -28,8 +27,14 @@ const MyOrders = () => {
         setPageLoading(false);
       }
     };
-    fetchOrders();
-  }, []);
+
+    if (user) {
+      setPageLoading(true);
+      setTimeout(() => {
+        fetchOrders();
+      }, 1000);
+    }
+  }, [user]);
 
   // console.log(orders);
   return (

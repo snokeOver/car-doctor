@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import ThemeButton from "./ThemeButton";
 import ButtonSpinner from "../shared/ButtonSpinner";
 import useAuth from "../../hooks/useAuth";
@@ -10,6 +10,8 @@ const Navbar = () => {
   const { pageLoading } = useData();
   const logOut = useLogOut();
 
+  const { pathname } = useLocation();
+
   // Handle LogOut operation
   const handleLogOut = () => {
     logOut();
@@ -18,71 +20,76 @@ const Navbar = () => {
   // All the navlinks
   const navItems = (
     <>
-      <li>
+      <li className="relative">
         <NavLink
           className={({ isActive }) =>
-            `${
-              isActive ? "text-prime border-b border-prime" : "hover:text-prime"
-            } mr-1 rounded-md`
+            `${isActive ? "text-prime" : "hover:text-prime"} mr-1 `
           }
           to="/"
         >
           Home
         </NavLink>
+        {pathname === "/" ? (
+          <div className=" absolute w-full h-[1.3px] py-0 rounded-none bg-prime -bottom-4 hover:bg-prime"></div>
+        ) : null}
       </li>
-      <li>
+      <li className="relative">
         <NavLink
           className={({ isActive }) =>
-            `${
-              isActive ? "text-prime border-b border-prime" : "hover:text-prime"
-            } mr-1 rounded-md`
+            `${isActive ? "text-prime" : "hover:text-prime"} mr-1 `
           }
           to="/about"
         >
           About
         </NavLink>
+        {pathname === "/about" ? (
+          <div className=" absolute w-full h-[1.3px] py-0 rounded-none bg-prime -bottom-4 hover:bg-prime"></div>
+        ) : null}
       </li>
-      <li>
+
+      <li className="relative">
         <NavLink
           className={({ isActive }) =>
-            `${
-              isActive ? "text-prime border-b border-prime" : "hover:text-prime"
-            } mr-1 rounded-md`
+            `${isActive ? "text-prime" : "hover:text-prime"} mr-1 `
           }
           to="/Services"
         >
           Services
         </NavLink>
+        {pathname === "/Services" ? (
+          <div className=" absolute w-full h-[1.3px] py-0 rounded-none bg-prime -bottom-4 hover:bg-prime"></div>
+        ) : null}
       </li>
+
       {user && (
         <>
-          <li>
+          <li className="relative">
             <NavLink
               className={({ isActive }) =>
-                `${
-                  isActive
-                    ? "text-prime border-b border-prime"
-                    : "hover:text-prime"
-                } mr-1 rounded-md`
+                `${isActive ? "text-prime" : "hover:text-prime"} mr-1 `
               }
               to="/my-orders"
             >
               My Orders
             </NavLink>
+            {pathname === "/my-orders" ? (
+              <div className=" absolute w-full h-[1.3px] py-0 rounded-none bg-prime -bottom-4 hover:bg-prime"></div>
+            ) : null}
           </li>
         </>
       )}
-      <li>
+      <li className="relative">
         <NavLink
           className={({ isActive }) =>
-            `${
-              isActive ? "text-prime border-b border-prime" : "hover:text-prime"
-            } mr-1 rounded-md`
+            `${isActive ? "text-prime" : "hover:text-prime"} mr-1 `
           }
           to="/contact"
         >
           Contact
         </NavLink>
+        {pathname === "/contact" ? (
+          <div className=" absolute w-full h-[1.3px] py-0 rounded-none bg-prime -bottom-4 hover:bg-prime"></div>
+        ) : null}
       </li>
     </>
   );
