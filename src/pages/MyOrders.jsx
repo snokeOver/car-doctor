@@ -1,13 +1,16 @@
-import axios from "axios";
-import { useContext, useEffect, useState } from "react";
-import { DataContext } from "../providers/DataProvider";
-import { AuthContext } from "../providers/AuthProvider";
+import { useEffect, useState } from "react";
+
 import CartCard from "../conponents/CartCard";
 import PageSkeleton from "../conponents/shared/PageSkeleton";
+import useData from "../hooks/useData";
+import useAuth from "../hooks/useAuth";
+import useSAxios from "../hooks/useSAxios";
+
 const MyOrders = () => {
-  const baseUrl = import.meta.env.VITE_BASE_URL;
-  const { pageLoading, setPageLoading } = useContext(DataContext);
-  const { user } = useContext(AuthContext);
+  const sAxios = useSAxios();
+
+  const { pageLoading, setPageLoading } = useData();
+  const { user } = useAuth();
   const [orders, setOrders] = useState([]);
 
   // Fetch all the checkout from Database
@@ -15,14 +18,11 @@ const MyOrders = () => {
     setPageLoading(true);
     const fetchOrders = async () => {
       try {
-        const response = await axios.get(
-          `${baseUrl}/api/checkouts/${user.uid}`,
-          { withCredentials: true }
-        );
+        const response = await sAxios.get(`/api/checkouts/${user.uid}`);
         if (response) {
           setOrders(response.data);
-          setPageLoading(false);
         }
+        setPageLoading(false);
       } catch (err) {
         console.log(err.message);
         setPageLoading(false);
@@ -40,7 +40,7 @@ const MyOrders = () => {
         <div>
           <div className="relative">
             <img
-              src="../../public/images/checkout/checkout.png"
+              src="/images/checkout/checkout.png"
               alt=""
               className="w-full"
             />

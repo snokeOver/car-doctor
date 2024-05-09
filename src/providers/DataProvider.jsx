@@ -1,10 +1,10 @@
 import { createContext, useEffect, useState } from "react";
-import axios from "axios";
+import useAxios from "../hooks/useAxios";
 
 export const DataContext = createContext();
 
 const DataProvider = ({ children }) => {
-  const baseUrl = import.meta.env.VITE_BASE_URL;
+  const axios = useAxios();
   const [pageLoading, setPageLoading] = useState(false);
   const defaultTheme = "dark";
   const [currTheme, setCurrTheme] = useState(defaultTheme);
@@ -16,7 +16,7 @@ const DataProvider = ({ children }) => {
     setPageLoading(true);
     const fetchServices = async () => {
       try {
-        const response = await axios.get(`${baseUrl}/api/services`);
+        const response = await axios.get("/api/services");
         if (response) {
           setServices(response.data);
           setPageLoading(false);

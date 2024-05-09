@@ -1,15 +1,15 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import ActionButton from "../conponents/shared/ActionButton";
-import { AuthContext } from "../providers/AuthProvider";
-import { DataContext } from "../providers/DataProvider";
+
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import axios from "axios";
+
+import useData from "../hooks/useData";
+import useAuth from "../hooks/useAuth";
 
 const Login = () => {
-  const baseUrl = import.meta.env.VITE_BASE_URL;
   const location = useLocation();
-  const { setPageLoading } = useContext(DataContext);
-  const { signIn } = useContext(AuthContext);
+  const { setPageLoading } = useData();
+  const { signIn } = useAuth();
   const [formData, setFormData] = useState({
     email: "",
     pass: "",
@@ -32,17 +32,9 @@ const Login = () => {
     setPageLoading(true);
 
     signIn(formData.email, formData.pass)
-      .then(async (result) => {
-        const response = await axios.post(
-          `${baseUrl}/api/jwt`,
-          { uid: result.user.uid },
-          { withCredentials: true }
-        );
-
-        if (response) {
-          setPageLoading(false);
-          navigate(location?.state ? location?.state : "/");
-        }
+      .then((result) => {
+        setPageLoading(false);
+        navigate(location?.state ? location?.state : "/");
       })
       .catch((err) => {
         setErrMsg(err.message);
@@ -53,7 +45,7 @@ const Login = () => {
     <div className="hero  bg-base-200 min-h-[calc(100vh-290px)]">
       <div className="hero-content flex  lg:flex-row flex-col-reverse gap-8">
         <div className="text-center lg:text-left w-1/2 ">
-          <img src="../../public/images/login/login.svg" alt="" />
+          <img src="/images/login/login.svg" alt="" />
         </div>
         <div className="card w-[90%] shadow-2xl bg-base-100 lg:w-1/2">
           <form className="card-body" onSubmit={handleLoginButton}>

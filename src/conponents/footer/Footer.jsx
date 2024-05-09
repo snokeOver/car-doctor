@@ -2,7 +2,7 @@ const Footer = () => {
   return (
     <footer className="footer p-10 bg-[#151515] text-gray-100 justify-around">
       <aside>
-        <img src="../../../public/logo.svg" alt="" className="max-w-16" />
+        <img src="/logo.svg" alt="" className="max-w-16" />
         <p>
           ACME Industries Ltd.
           <br />

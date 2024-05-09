@@ -7,10 +7,13 @@ import {
   updateProfile,
 } from "firebase/auth";
 import auth from "../helper/GAuth";
+import useAxios from "../hooks/useAxios";
 
 export const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
+  const nSAxios = useAxios();
+
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
 
@@ -36,12 +39,36 @@ const AuthProvider = ({ children }) => {
 
   // Observer for the change in User
   useEffect(() => {
-    const unSubscribe = onAuthStateChanged(auth, (user) => {
+    const unSubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
-        setLoading(false);
         setUser(user);
+        try {
+          const response = await nSAxios.post(
+            "/api/jwt",
+            { uid: user.uid },
+            { withCredentials: true }
+          );
+          setLoading(false);
+          console.log(response.data);
+        } catch (err) {
+          console.log(err.message);
+          setLoading(false);
+        }
       } else {
-        setLoading(false);
+        try {
+          const response = await nSAxios.post(
+            "/api/logout",
+            {
+              uid: user?.uid,
+            },
+            { withCredentials: true }
+          );
+          setUser(null);
+          setLoading(false);
+        } catch (err) {
+          console.log("Error logging out:", err.message);
+          setLoading(false);
+        }
       }
     });
     return () => unSubscribe();

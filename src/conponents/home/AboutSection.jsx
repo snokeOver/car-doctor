@@ -6,11 +6,11 @@ const AboutSection = () => {
       <div className="hero-content flex-col lg:flex-row">
         <div className="flex-1 relative">
           <img
-            src="../../../public/images/about_us/person.jpg"
+            src="/images/about_us/person.jpg"
             className="w-3/4 rounded-lg shadow-2xl"
           />
           <img
-            src="../../../public/images/about_us/parts.jpg"
+            src="/images/about_us/parts.jpg"
             className="absolute w-1/2 rounded-lg shadow-2xl -bottom-8 right-8 border-8 border-gray-50"
           />
         </div>

@@ -62,11 +62,7 @@ const CheckOut = () => {
   return (
     <div>
       <div className="relative">
-        <img
-          src="../../public/images/checkout/checkout.png"
-          alt=""
-          className="w-full"
-        />
+        <img src="/images/checkout/checkout.png" alt="" className="w-full" />
         <div className="absolute  top-0 h-full w-full flex items-center bg bg-gradient-to-r from-[#151515] to-[rgba(21, 21, 21, 0.00)] rounded-xl">
           <h3 className=" text-gray-100 text-3xl md:text-4xl font-semibold pl-10">
             Check Out

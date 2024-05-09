@@ -1,12 +1,12 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import ActionButton from "../conponents/shared/ActionButton";
-import { AuthContext } from "../providers/AuthProvider";
-import { DataContext } from "../providers/DataProvider";
 import { useNavigate, Link } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
+import useData from "../hooks/useData";
 
 const Register = () => {
-  const { register, updateProfile } = useContext(AuthContext);
-  const { setPageLoading } = useContext(DataContext);
+  const { register, updateProfile } = useAuth();
+  const { setPageLoading } = useData();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -49,7 +49,7 @@ const Register = () => {
     <div className="hero  bg-base-200 min-h-[calc(100vh-290px)]">
       <div className="hero-content flex  lg:flex-row flex-col-reverse gap-8">
         <div className="text-center lg:text-left w-1/2 ">
-          <img src="../../public/images/login/login.svg" alt="" />
+          <img src="/images/login/login.svg" alt="" />
         </div>
         <div className="card w-[90%] shadow-2xl bg-base-100 lg:w-1/2">
           <form className="card-body" onSubmit={handleLoginButton}>

@@ -1,26 +1,18 @@
 import { NavLink } from "react-router-dom";
 import ThemeButton from "./ThemeButton";
-import { useContext } from "react";
-import { AuthContext } from "../../providers/AuthProvider";
-import { DataContext } from "../../providers/DataProvider";
 import ButtonSpinner from "../shared/ButtonSpinner";
+import useAuth from "../../hooks/useAuth";
+import useData from "../../hooks/useData";
+import useLogOut from "../../hooks/useLogOut";
 
 const Navbar = () => {
-  const { user, logOut, setUser } = useContext(AuthContext);
-  const { setPageLoading, pageLoading } = useContext(DataContext);
+  const { user } = useAuth();
+  const { pageLoading } = useData();
+  const logOut = useLogOut();
 
   // Handle LogOut operation
   const handleLogOut = () => {
-    setPageLoading(true);
-    logOut()
-      .then(() => {
-        setPageLoading(false);
-        setUser(null);
-      })
-      .catch((err) => {
-        setPageLoading(false);
-        console.log(err.message);
-      });
+    logOut();
   };
 
   // All the navlinks
@@ -129,7 +121,7 @@ const Navbar = () => {
             className="text-3xl font-semibold font-rubik flex items-center"
             to="/"
           >
-            <img src="../../../public/logo.svg" alt="" className="w-12" />
+            <img src="/logo.svg" alt="" className="w-12" />
           </NavLink>
         </div>
       </div>
@@ -143,11 +135,7 @@ const Navbar = () => {
         <div className="dropdown dropdown-end">
           <div tabIndex={0} role="button" className="mr-3 cursor-pointer">
             <div className="indicator">
-              <img
-                src="../../../public/icons/bag.svg"
-                className="h-6 w-6"
-                alt=""
-              />
+              <img src="/icons/bag.svg" className="h-6 w-6" alt="" />
               <span className="badge badge-sm indicator-item text-prime">
                 8
               </span>
@@ -169,7 +157,7 @@ const Navbar = () => {
           </div>
         </div>
         <div className="mr-2 cursor-pointer">
-          <img src="../../../public/icons/search.svg" alt="" />
+          <img src="/icons/search.svg" alt="" />
         </div>
 
         {user ? (

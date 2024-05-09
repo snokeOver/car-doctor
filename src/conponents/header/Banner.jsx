@@ -5,27 +5,27 @@ const Banner = () => {
   const [images, setImages] = useState([
     {
       id: 1,
-      link: "../../../public/images/banner/1.jpg",
+      link: "/images/banner/1.jpg",
     },
     {
       id: 2,
-      link: "../../../public/images/banner/2.jpg",
+      link: "/images/banner/2.jpg",
     },
     {
       id: 3,
-      link: "../../../public/images/banner/3.jpg",
+      link: "/images/banner/3.jpg",
     },
     {
       id: 4,
-      link: "../../../public/images/banner/4.jpg",
+      link: "/images/banner/4.jpg",
     },
     {
       id: 5,
-      link: "../../../public/images/banner/5.jpg",
+      link: "/images/banner/5.jpg",
     },
     {
       id: 6,
-      link: "../../../public/images/banner/6.jpg",
+      link: "/images/banner/6.jpg",
     },
   ]);
   return (
